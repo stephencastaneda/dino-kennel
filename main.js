@@ -1,6 +1,28 @@
 
 const dinos = []
 
+//printtodom function
+const printToDom = (divID, textToPrint) => {
+    const selectedDiv = document.getElementById(divID);
+    selectedDiv.innerHTML = textToPrint;
+}
+
+//function to print dinocards using bootstrap cards
+const printDinos = (dinoArray) => {
+    let domString = '';
+    for (let i =0; i < dinoArray.length; i++){
+      domString += '<div class="col-4">';
+      domString += '<div class="card">';
+      domString += `<img class="card-img-top" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
+      domString += '<div class="card-body">';
+      domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
+      domString += `<p class="card-text">Health: ${dinoArray[i].health}</p>`;
+      domString += '</div>';
+      domString += '</div>';
+      domString += '</div>';
+    }
+    printToDom('kennel', domString);
+  };
 
 //created a function to test submit button and add prevent default to stop auto refresh
 //used getElementById.value to console log values from bootsrap form
@@ -17,10 +39,13 @@ const newDino = (e) => {
         health: 100,
         imageUrl: document.getElementById('dino-image').value
     };
+
+
     dinos.push(brandNewDino);
     console.log(dinos);
     document.getElementById('new-dino-form').reset();
     document.getElementById('collapseOne').classList.remove('show');
+    printDinos(dinos);
 };
    
 
