@@ -1,3 +1,7 @@
 body {
     background-color: grey;
 }
+
+#single-view {
+    border: 3px;
+}
