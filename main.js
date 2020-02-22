@@ -1,11 +1,66 @@
 
-const dinos = []
+const dinos = [
+    {
+      id: 'dino1',
+      name: 'Rex',
+      type: 'T Rex',
+      age: 100,
+      owner: 'Zoe',
+      adventures: [],
+      health: 100,
+      imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    },
+    {
+      id: 'dino2',
+      name: 'Steve',
+      type: 'Velociraptor',
+      age: 1,
+      owner: 'Mary',
+      adventures: [],
+      health: 100,
+      imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    },
+    {
+      id: 'dino3',
+      name: 'Susan',
+      type: 'Stegasaurus',
+      age: 55,
+      owner: 'Luke',
+      adventures: [],
+      health: 100,
+      imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    }
+  ];
+  
 
 //printtodom function
 const printToDom = (divID, textToPrint) => {
     const selectedDiv = document.getElementById(divID);
     selectedDiv.innerHTML = textToPrint;
 }
+
+const closeSingleViewEvent = () => {
+    printToDom('single-view', '');
+    printDinos(dinos);
+}
+//created function to print button and clear cards
+const viewSingleDino = () => {
+    let domString = ''
+    domString += `<button id="close-single-view" class="btn btn-outline-dark"><i class="far fa-window-close"></i></button>`
+    printToDom('kennel','');
+    printToDom('single-view', domString);
+    document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);
+};
+
+
+//added event listener to each button
+const singleDinoAddEvents = () => {
+    const dinoViewButtons = document.getElementsByClassName('single-dino');
+    for(let i=0; i < dinoViewButtons.length; i++) {
+        dinoViewButtons[i].addEventListener('click', viewSingleDino);
+    }
+};
+
 
 //function to print dinocards using bootstrap cards
 const printDinos = (dinoArray) => {
@@ -17,11 +72,13 @@ const printDinos = (dinoArray) => {
       domString += '<div class="card-body">';
       domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
       domString += `<p class="card-text">Health: ${dinoArray[i].health}</p>`;
+      domString += `<button class="btn btn-outline-dark single-dino"><i class="fas fa-eye"></i></button>`
       domString += '</div>';
       domString += '</div>';
       domString += '</div>';
     }
     printToDom('kennel', domString);
+    singleDinoAddEvents();
   };
 
 //created a function to test submit button and add prevent default to stop auto refresh
@@ -47,13 +104,12 @@ const newDino = (e) => {
     document.getElementById('collapseOne').classList.remove('show');
     printDinos(dinos);
 };
+
    
-
-
-
 //init function to add event listener to submit dino button
 const init = () => {
     document.getElementById('submit-new-dino').addEventListener('click', newDino);
+    printDinos(dinos);
    
 };
 
