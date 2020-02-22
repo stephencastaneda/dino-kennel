@@ -1,7 +1,9 @@
-//created a function to test submit button and add prevent default to stop auto refresh
-//used getElementById.value to console log values from bootsrap form
 
 const dinos = []
+
+
+//created a function to test submit button and add prevent default to stop auto refresh
+//used getElementById.value to console log values from bootsrap form
 
 const newDino = (e) => {
     e.preventDefault();
@@ -17,10 +19,10 @@ const newDino = (e) => {
     };
     dinos.push(brandNewDino);
     console.log(dinos);
-
+    document.getElementById('new-dino-form').reset();
+    document.getElementById('collapseOne').classList.remove('show');
 };
    
-    // console.log('hi from newDino', dinos);
 
 
 
